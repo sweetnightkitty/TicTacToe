@@ -20,5 +20,27 @@ function getBoard() {
 
 
 //funtion gameController - controls game play behind the scenes
+function gameController() {
+    //Store player's info and associated game piece
+    const players = [
+        {
+            name: "Player 1",
+            marker: "O",
+        },
+
+        {
+            name: "Player 2",
+            marker: "X",
+        }
+    ]
+
+    //default player set to player 1 to start the game
+    let activePlayer = players[0];
+
+    //Switches player turns
+    const switchPlayers = () => {
+        activePlayer = activePlayer === players[0] ? players[1] : players[0];
+    }
+}
 
 //function screenController - controls the UI and screen
