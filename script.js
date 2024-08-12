@@ -11,7 +11,11 @@ function getBoard() {
         }
     }
 
-    return board;
+    const getBoard = () => board;
+
+    return {
+        getBoard,
+    }
 }
 
 
