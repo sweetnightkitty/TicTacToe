@@ -41,6 +41,12 @@ function gameController() {
     const switchPlayers = () => {
         activePlayer = activePlayer === players[0] ? players[1] : players[0];
     }
+
+    const getActivePlayer = () => activePlayer;
+
+    //gets board
+    const board = getBoard.getBoard();
+
 }
 
 //function screenController - controls the UI and screen
