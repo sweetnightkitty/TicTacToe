@@ -170,7 +170,14 @@ function screenController() {
 
                 //Gives each gamepiece a unique dataset.number (1-9) to easily target
                 cellId+= 1;
-                cellButton.dataset.number = cellId; 
+                cellButton.dataset.number = cellId
+
+                //Assigns button O or X after game play and disables button from further use
+                if(cell != 0) {
+                    cellButton.textContent = cell;
+                    cellButton.disabled = true;
+                }
+
                 gameBoardDiv.appendChild(cellButton);
             })
         })  
@@ -185,8 +192,9 @@ function screenController() {
         if(!selectedButton) return;
 
         game.playRound(selectedButton);
-        gamePiece.textContent = activePlayerMarker; //updates button text to the correct marker
-        gamePiece.disabled = true;
+
+        //****logic for displaying textContent on button goes here - in progress / doesn't work
+
 
         updateScreen();
     }
