@@ -41,12 +41,35 @@ function gameController() {
     const board = getBoard();
 
     //selectedButton is the button pressed by player on UI
-    const playRound = () => {
+    const playRound = (selectedButton) => {
         let row;
         let column;
 
-        row = prompt("Choose a row");
-        column = prompt("Choose a column");
+        //Identifies what row the selectedButton is in
+        if(selectedButton < 4) {
+            row = 0;
+        } else if(selectedButton > 6) {
+            row = 2;
+        } else {
+            row = 1;
+        }
+
+        //Identifies what column the selectedButton is in
+        if(
+            selectedButton == 1 || 
+            selectedButton == 4 ||
+            selectedButton == 7
+        ) {
+            column = 0;
+            } else if(
+                selectedButton == 2 ||
+                selectedButton == 5 ||
+                selectedButton == 8
+            ) {
+                column = 1;
+            } else {
+                column = 2;
+            }
 
         board[row][column] = activePlayer.marker;
 
@@ -125,30 +148,52 @@ function screenController() {
     const announcePlayerTurn = document.querySelector(".player-turn");
     const gameBoardDiv = document.querySelector(".board");
 
-    //clear the board
-    gameBoardDiv.textContent = "";
+    const updateScreen = () => {
+        //clear the board
+        gameBoardDiv.textContent = "";
 
-    //new version of the board
-    const board = game.getBoard();
+        //new version of the board
+        const board = game.getBoard();
 
-    //get the current active player
-    const activePlayer = game.getActivePlayer();
+        //get the current active player
+        const activePlayer = game.getActivePlayer();
 
-    //display the current player's turn
-    announcePlayerTurn.textContent = `${activePlayer.name}'s turn!`;
+        //display the current player's turn
+        announcePlayerTurn.textContent = `${activePlayer.name}'s turn!`;
 
-    //Creates gameboard on screen
-    let cellId = 0;
-    board.forEach(row => {
-        row.forEach(cell => {
-            const cellButton = document.createElement("button");
-            cellButton.classList.add("cell");
+        //Creates gameboard on screen
+        let cellId = 0;
+        board.forEach(row => {
+            row.forEach(cell => {
+                const cellButton = document.createElement("button");
+                cellButton.classList.add("cell");
 
-            //Gives each gamepiece a unique dataset.number (1-9) to easily target
-            cellId+= 1;
-            cellButton.dataset.number = cellId; 
-            gameBoardDiv.appendChild(cellButton);
-        })
-    })
+                //Gives each gamepiece a unique dataset.number (1-9) to easily target
+                cellId+= 1;
+                cellButton.dataset.number = cellId; 
+                gameBoardDiv.appendChild(cellButton);
+            })
+        })  
+    }
+
+
+    function clickBoard(e) {
+        const selectedButton = e.target.dataset.number;
+        const activePlayerMarker = game.getActivePlayer().marker;
+        const gamePiece = e.target;
+
+        if(!selectedButton) return;
+
+        game.playRound(selectedButton);
+        gamePiece.textContent = activePlayerMarker; //updates button text to the correct marker
+        gamePiece.disabled = true;
+
+        updateScreen();
+    }
+
+    gameBoardDiv.addEventListener("click", clickBoard);
+
+    //initial render
+    updateScreen();
 }
 
