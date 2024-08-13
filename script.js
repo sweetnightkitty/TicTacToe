@@ -147,7 +147,7 @@ function gameController() {
 
 //function screenController - controls the UI and screen
 function screenController() {
-    const game = gameController();
+    let game = gameController();
     const announcePlayerTurn = document.querySelector(".player-turn");
     const gameBoardDiv = document.querySelector(".board");
 
@@ -159,15 +159,15 @@ function screenController() {
         startBtn.style.display = "none";
     })
 
-    // const resetBtn = document.querySelector(".btn-reset");
-    // resetBtn.addEventListener("click", () => {
-    //             //clear the board
-    //             gameBoardDiv.textContent = "";
+    const resetBtn = document.querySelector(".btn-reset");
+    resetBtn.addEventListener("click", () => {
+                //clear the board
+                gameBoardDiv.textContent = "";
 
-    //             //Resets 2d array and thus game board
-    //             game = gameController();
-    //             updateScreen();
-    // })
+                //Resets 2d array and thus game board
+                game = gameController();
+                updateScreen();
+    })
 
     const updateScreen = () => {
 
