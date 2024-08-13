@@ -79,6 +79,44 @@ header>h1 {
     margin-bottom: 15px;
 }
 
+.winner-modal {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 55vw;
+    height: 25vh;
+    background-color: white;
+    border: 2px dashed var(--color-dark-theme-bgd);
+    padding: 20px 40px;
+    display: none;
+}
+
+.winner-msg {
+    font-family: "PC senior";
+    font-size: 50px;
+    text-align: center;
+    color: var(--color-dark-theme-bgd);
+}
+
+.play-again {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 35px;
+}
+
+.btn-play-again {
+    font-family: "PC senior";
+    background-color: var(--color-retro-yellow);
+    color: var(--color-dark-theme-bgd);
+    border: 2px dashed var(--color-dark-theme-bgd);
+    padding: 10px 20px;
+    margin-bottom: 15px;
+}
+
 footer {
     display: flex;
     align-items: center;
