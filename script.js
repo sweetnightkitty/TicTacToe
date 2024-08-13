@@ -153,7 +153,7 @@ function screenController() {
         gameBoardDiv.textContent = "";
 
         //new version of the board
-        const board = game.getBoard();
+        const board = game.getBoard;
 
         //get the current active player
         const activePlayer = game.getActivePlayer();
@@ -197,3 +197,4 @@ function screenController() {
     updateScreen();
 }
 
+screenController();
