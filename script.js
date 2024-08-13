@@ -40,6 +40,7 @@ function gameController() {
     //gets board
     const board = getBoard();
 
+
     //selectedButton is the button pressed by player on UI
     const playRound = (selectedButton) => {
         let row;
@@ -123,9 +124,9 @@ function gameController() {
 
         //Announces the winner
         if(isGameOver() == "O") {
-            alert(activePlayer.name + " wins!");
+            alert(activePlayer.name + " is the winner!")
         } else if(isGameOver() == "X") {
-            alert(activePlayer.name + " wins!");
+            alert(activePlayer.name + " is the winner!")
         } else if(isGameOver() == "draw") {
             alert("It's a draw!");
         }
@@ -195,14 +196,10 @@ function screenController() {
 
     function clickBoard(e) {
         const selectedButton = e.target.dataset.number;
-        const activePlayerMarker = game.getActivePlayer().marker;
-        const gamePiece = e.target;
 
         if(!selectedButton) return;
 
         game.playRound(selectedButton);
-
-        //****logic for displaying textContent on button goes here - in progress / doesn't work
 
 
         updateScreen();
