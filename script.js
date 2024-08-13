@@ -76,12 +76,13 @@ function gameController() {
 
         //Checks if game is over or returns winner
         const isGameOver = () => {
-            //checks the upper row, left column
-            if(
-                board[0][0] != 0 &&
-                (board[0][0] == board[0][1] && board[0][0] == board[0][2]) ||
-                (board[0][0] == board[1][0] && board[0][0] == board[2][0])
-             ) {
+            //checks the left column
+            if(board[0][0] == board[1][0] && board[0][0] == board[2][0] && board[0][0] != 0) {
+                return board[0][0];
+            }
+
+            //checks the upper row
+            if(board[0][0] == board[0][1] && board[0][0] == board[0][2] && board[0][0] != 0) {
                 return board[0][0];
             }
 
@@ -96,12 +97,13 @@ function gameController() {
                 return board[1][1];
             }
 
-            //checks the lower row, and right column
-            if(
-                board[2][2] != 0 &&
-                (board[2][2] == board[2][1] && board[2][2] == board[2][0]) ||
-                (board[2][2] == board[1][2] && board[2][2] == board[0][2])
-            ) {
+            //checks the lower row
+            if(board[2][2] == board[2][1] && board[2][2] == board[2][0] && board[2][2] != 0) {
+                return board[2][2];
+            }
+
+            //checks the right column
+            if(board[2][2] == board[1][2] && board[2][2] == board[0][2] && board[2][2] != 0) {
                 return board[2][2];
             }
 
@@ -156,6 +158,16 @@ function screenController() {
 
         startBtn.style.display = "none";
     })
+
+    // const resetBtn = document.querySelector(".btn-reset");
+    // resetBtn.addEventListener("click", () => {
+    //             //clear the board
+    //             gameBoardDiv.textContent = "";
+
+    //             //Resets 2d array and thus game board
+    //             game = gameController();
+    //             updateScreen();
+    // })
 
     const updateScreen = () => {
 
