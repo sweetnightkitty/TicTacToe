@@ -1,3 +1,13 @@
+:root {
+    --color-retro-yellow: #F6EB14;
+    --color-dark-theme-bgd: #2b2b2b;
+}
+
+@font-face {
+    font-family: "PC senior";
+    src: url(pcsenior.ttf);
+}
+
 * {
     margin: 0;
     padding: 0;
