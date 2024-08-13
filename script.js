@@ -49,8 +49,67 @@ function gameController() {
         column = prompt("Choose a column");
 
         board[row][column] = activePlayer.marker;
+
+        //Checks if game is over or returns winner
+        const isGameOver = () => {
+            //checks the upper row, left column
+            if(
+                board[0][0] != 0 &&
+                (board[0][0] == board[0][1] && board[0][0] == board[0][2]) ||
+                (board[0][0] == board[1][0] && board[0][0] == board[2][0])
+             ) {
+                return board[0][0];
+            }
+
+            //checks middle row, middle column, and two diagonals
+            if(
+                board[1][1] != 0 &&
+                (board[1][1] == board[1][0] && board[1][1] == board[1][2]) ||
+                (board[1][1] == board[0][1] && board[1][1] == board[2][1]) ||
+                (board[1][1] == board[0][0] && board[1][1] == board[2][2]) ||
+                (board[1][1] == board[0][2] && board[1][1] == board[2][0])
+            ) {
+                return board[1][1];
+            }
+
+            //checks the lower row, and right column
+            if(
+                board[2][2] != 0 &&
+                (board[2][2] == board[2][1] && board[2][2] == board[2][0]) ||
+                (board[2][2] == board[1][2] && board[2][2] == board[0][2])
+            ) {
+                return board[2][2];
+            }
+
+            //Counts how many spaces on the board have been taken
+            let tempArray = [];
+            for(let i = 0; i < 3; i++) {
+                for(let j = 0; j < 3; j++) {
+                    if(board[i][j] != 0) {
+                        tempArray.push(1);
+                    }
+                }
+            }
+
+            //Announces a draw when all 9 spaces on the board are taken but no winner has been returned
+            if(tempArray.length === 9) {
+                return "draw";
+            }
+
+        }
+
+        //Announces the winner
+        if(isGameOver() == "O") {
+            alert(activePlayer.name + " wins!");
+        } else if(isGameOver() == "X") {
+            alert(activePlayer.name + " wins!");
+        } else if(isGameOver() == "draw") {
+            alert("It's a draw!");
+        }
+
         console.log(board); //logs updated board to console
-        switchPlayers();
+        switchPlayers(); //switches players in preparation for the next round
+
     }
 
     return {
