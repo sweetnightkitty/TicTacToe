@@ -125,12 +125,21 @@ function gameController() {
         }
 
         //Announces the winner
+        const winnerModal = document.querySelector(".winner-modal");
+        const winnerMsg = document.querySelector(".winner-msg");
+        const gameBoard = document.querySelector(".game");
         if(isGameOver() == "O") {
-            alert(activePlayer.name + " is the winner!")
+            winnerMsg.textContent = activePlayer.name + " is the winner!";
+            winnerModal.style.display = "block";
+            gameBoard.style.visibility = "hidden";
         } else if(isGameOver() == "X") {
-            alert(activePlayer.name + " is the winner!")
+            winnerMsg.textContent = activePlayer.name + " is the winner!";
+            winnerModal.style.display = "block";
+            gameBoard.style.visibility = "hidden";
         } else if(isGameOver() == "draw") {
-            alert("It's a draw!");
+            winnerMsg.textContent = "It's a draw!";
+            winnerModal.style.display = "block";
+            gameBoard.style.visibility = "hidden";
         }
 
         console.log(board); //logs updated board to console
@@ -164,7 +173,7 @@ function screenController() {
                 //clear the board
                 gameBoardDiv.textContent = "";
 
-                //Resets 2d array and thus game board
+                //Reruns the function, and reassigns to game in order to reset the 2d array back to all zeros and restart the game play.
                 game = gameController();
                 updateScreen();
     })
