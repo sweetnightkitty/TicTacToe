@@ -119,6 +119,36 @@ function gameController() {
     }
 }
 
-const game = gameController();
-
 //function screenController - controls the UI and screen
+function screenController() {
+    const game = gameController();
+    const announcePlayerTurn = document.querySelector(".player-turn");
+    const gameBoardDiv = document.querySelector(".board");
+
+    //clear the board
+    gameBoardDiv.textContent = "";
+
+    //new version of the board
+    const board = game.getBoard();
+
+    //get the current active player
+    const activePlayer = game.getActivePlayer();
+
+    //display the current player's turn
+    announcePlayerTurn.textContent = `${activePlayer.name}'s turn!`;
+
+    //Creates gameboard on screen
+    let cellId = 0;
+    board.forEach(row => {
+        row.forEach(cell => {
+            const cellButton = document.createElement("button");
+            cellButton.classList.add("cell");
+
+            //Gives each gamepiece a unique dataset.number (1-9) to easily target
+            cellId+= 1;
+            cellButton.dataset.number = cellId; 
+            gameBoardDiv.appendChild(cellButton);
+        })
+    })
+}
+
