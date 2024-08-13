@@ -148,7 +148,16 @@ function screenController() {
     const announcePlayerTurn = document.querySelector(".player-turn");
     const gameBoardDiv = document.querySelector(".board");
 
+    const startBtn = document.querySelector(".btn-start");
+    startBtn.addEventListener("click", () => {
+        const gameDiv = document.querySelector(".game");
+        gameDiv.style.visibility = "visible";
+
+        startBtn.style.display = "none";
+    })
+
     const updateScreen = () => {
+
         //clear the board
         gameBoardDiv.textContent = "";
 
