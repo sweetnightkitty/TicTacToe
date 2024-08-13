@@ -11,17 +11,12 @@ function getBoard() {
         }
     }
 
-    const getBoard = () => board;
-
-    return {
-        getBoard,
-    }
+    return board;
 }
 
 
 //funtion gameController - controls game play behind the scenes
 function gameController() {
-    //Store player's info and associated game piece
     const players = [
         {
             name: "Player 1",
@@ -34,10 +29,8 @@ function gameController() {
         }
     ]
 
-    //default player set to player 1 to start the game
     let activePlayer = players[0];
 
-    //Switches player turns
     const switchPlayers = () => {
         activePlayer = activePlayer === players[0] ? players[1] : players[0];
     }
@@ -45,8 +38,28 @@ function gameController() {
     const getActivePlayer = () => activePlayer;
 
     //gets board
-    const board = getBoard.getBoard();
+    const board = getBoard();
 
+    //selectedButton is the button pressed by player on UI
+    const playRound = () => {
+        let row;
+        let column;
+
+        row = prompt("Choose a row");
+        column = prompt("Choose a column");
+
+        board[row][column] = activePlayer.marker;
+        console.log(board); //logs updated board to console
+        switchPlayers();
+    }
+
+    return {
+        playRound,
+        getActivePlayer,
+        getBoard: board,
+    }
 }
+
+const game = gameController();
 
 //function screenController - controls the UI and screen
