@@ -68,6 +68,8 @@ header>h1 {
     color: white;
     border: 2px dashed var(--color-retro-yellow);
     padding: 20px 40px;
+    /* temporary to edit the player input form */
+    visibility: hidden;
 }
 
 .btn-reset {
@@ -100,6 +102,51 @@ header>h1 {
     text-align: center;
     color: var(--color-dark-theme-bgd);
 }
+
+form {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 55vw;
+    height: 25vh;
+    background-color: var(--color-dark-theme-bgd);
+    border: 2px dashed white;
+    padding: 20px 40px;
+}
+
+.form-title {
+    font-size: 25px;
+    text-align: center;
+}
+
+.form-fields {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+}
+
+input {
+    margin-top: 5px;
+    width: 150px;
+    height: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.btn-submit-form {
+    align-self: center;
+    font-family: "PC senior";
+    background-color: var(--color-dark-theme-bgd);
+    color: white;
+    border: 2px dashed var(--color-retro-yellow);
+    padding: 10px 20px;
+    margin-bottom: 15px;
+}
+
 
 .play-again {
     display: flex;
