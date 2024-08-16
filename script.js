@@ -164,6 +164,7 @@ function screenController() {
             const gameDiv = document.querySelector(".game");
             gameDiv.style.visibility = "visible";
             form.style.visibility = "hidden";
+            gameBoardDiv.style.visibility = "visible";
 
             userOne = document.getElementById("userOne").value;
             userTwo = document.getElementById("userTwo").value;
@@ -184,6 +185,20 @@ function screenController() {
         //Reruns the function, and reassigns to game in order to reset the 2d array back to all zeros and restart the game play.
         game = gameController();
 
+        game.playerOne(userOne);
+        game.playerTwo(userTwo);
+        updateScreen();
+    })
+    
+    const newPlayersBtn = document.querySelector(".btn-new-players");
+    newPlayersBtn.addEventListener("click", () => {
+        gameBoardDiv.textContent = "";
+
+        //Reruns the function, and reassigns to game in order to reset the 2d array back to all zeros and restart the game play.
+        game = gameController();
+
+        form.style.visibility = "visible";
+        gameBoardDiv.style.visibility = "hidden";
         game.playerOne(userOne);
         game.playerTwo(userTwo);
         updateScreen();
