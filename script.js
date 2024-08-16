@@ -216,21 +216,42 @@ function screenController() {
         const winnerModal = document.querySelector(".winner-modal");
         const winnerMsg = document.querySelector(".winner-msg");
         const gameBoard = document.querySelector(".game");
+        const playAgainBtn = document.querySelector(".btn-play-again");
 
         if(winner == "O") {
             winnerMsg.textContent = activePlayer.name + " is the winner!";
             winnerModal.style.display = "block";
             gameBoard.style.visibility = "hidden";
+            playAgainBtn.disabled = false;
 
         } else if(winner == "X") {
             winnerMsg.textContent = activePlayer.name + " is the winner!";
             winnerModal.style.display = "block";
             gameBoard.style.visibility = "hidden";
+            playAgainBtn.disabled = false;
         } else if(winner == "draw") {
             winnerMsg.textContent = "It's a draw!";
             winnerModal.style.display = "block";
             gameBoard.style.visibility = "hidden";
+            playAgainBtn.disabled = false;
         }
+
+        playAgainBtn.addEventListener("click", () => {
+            if(winner != 0) {
+                //clear the board
+                gameBoardDiv.textContent = "";
+
+                //Reruns the function, and reassigns to game in order to reset the 2d array back to all zeros and restart the game play.
+                game = gameController();
+
+                winnerModal.style.display = "none";
+                const startBtn = document.querySelector(".btn-start");
+                startBtn.style.display = "block";
+
+                updateScreen();
+
+            }
+        })
 
         updateScreen();
     }
