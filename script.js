@@ -291,10 +291,6 @@ function screenController() {
 
     gameBoardDiv.addEventListener("click", clickBoard);
 
-    //initial render (player 1 is not here at first)
-    // game.playerOne(userOne);
-    // game.playerTwo(userTwo);
-    // updateScreen();
 }
 
 screenController();
