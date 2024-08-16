@@ -157,11 +157,11 @@ input {
 .play-again {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     padding-top: 35px;
 }
 
-.btn-play-again {
+.btn-play-again, .btn-modal-new-players {
     font-family: "PC senior";
     background-color: var(--color-dark-theme-bgd);
     color: white;
