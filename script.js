@@ -149,6 +149,7 @@ function screenController() {
     const announcePlayerTurn = document.querySelector(".player-turn");
     const gameBoardDiv = document.querySelector(".board");
     const gameMenu = document.querySelector(".game");
+    const winnerModal = document.querySelector(".winner-modal");
 
     let userOne = "Jack";
     let userTwo = "Sally";
@@ -207,6 +208,24 @@ function screenController() {
         updateScreen();
     })
 
+    const modalNewPlayersBtn = document.querySelector(".btn-modal-new-players");
+    modalNewPlayersBtn.addEventListener("click", () => {
+        gameBoardDiv.textContent = "";
+
+        //Reruns the function, and reassigns to game in order to reset the 2d array back to all zeros and restart the game play.
+        game = gameController();
+
+        form.style.visibility = "visible";
+        gameBoardDiv.style.visibility = "hidden";
+        gameMenu.style.visibility = "hidden";
+        winnerModal.style.display = "none";
+
+        game.playerOne(userOne);
+        game.playerTwo(userTwo);
+        updateScreen();
+    })
+
+
     const updateScreen = () => {
 
         //clear the board
@@ -258,8 +277,8 @@ function screenController() {
 
         //checks who the winner is (if one), and then generates a winner message
         const winner = game.isGameOver();
-        const winnerModal = document.querySelector(".winner-modal");
         const winnerMsg = document.querySelector(".winner-msg");
+        const winnerModal = document.querySelector(".winner-modal")
         // const gameBoard = document.querySelector(".game");
         // const boardGame = document.querySelector(".board");
         const playAgainBtn = document.querySelector(".btn-play-again");
