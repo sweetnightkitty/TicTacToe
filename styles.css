@@ -68,8 +68,6 @@ header>h1 {
     color: white;
     border: 2px dashed var(--color-retro-yellow);
     padding: 20px 40px;
-    /* temporary to edit the player input form */
-    visibility: hidden;
 }
 
 .btn-reset {
@@ -115,6 +113,7 @@ form {
     background-color: var(--color-dark-theme-bgd);
     border: 2px dashed white;
     padding: 20px 40px;
+    visibility: hidden;
 }
 
 .form-title {

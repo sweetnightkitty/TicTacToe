@@ -153,11 +153,19 @@ function screenController() {
     const userTwo = "Sally";
 
     const startBtn = document.querySelector(".btn-start");
+    const form = document.querySelector("form");
+    const formSubmitBtn = document.querySelector(".btn-submit-form");
     startBtn.addEventListener("click", () => {
-        const gameDiv = document.querySelector(".game");
-        gameDiv.style.visibility = "visible";
 
         startBtn.style.display = "none";
+        form.style.visibility = "visible";
+
+        formSubmitBtn.addEventListener("click", () => {
+            const gameDiv = document.querySelector(".game");
+            gameDiv.style.visibility = "visible";
+            form.style.visibility = "hidden";
+        })
+
     })
 
     const resetBtn = document.querySelector(".btn-reset");
