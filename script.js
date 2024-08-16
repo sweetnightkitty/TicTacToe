@@ -149,8 +149,8 @@ function screenController() {
     const announcePlayerTurn = document.querySelector(".player-turn");
     const gameBoardDiv = document.querySelector(".board");
 
-    const userOne = "Jack";
-    const userTwo = "Sally";
+    let userOne = "Jack";
+    let userTwo = "Sally";
 
     const startBtn = document.querySelector(".btn-start");
     const form = document.querySelector("form");
@@ -164,6 +164,14 @@ function screenController() {
             const gameDiv = document.querySelector(".game");
             gameDiv.style.visibility = "visible";
             form.style.visibility = "hidden";
+
+            userOne = document.getElementById("userOne").value;
+            userTwo = document.getElementById("userTwo").value;
+
+            //initial render of the game
+            game.playerOne(userOne);
+            game.playerTwo(userTwo);
+            updateScreen();
         })
 
     })
@@ -284,9 +292,9 @@ function screenController() {
     gameBoardDiv.addEventListener("click", clickBoard);
 
     //initial render (player 1 is not here at first)
-    game.playerOne(userOne);
-    game.playerTwo(userTwo);
-    updateScreen();
+    // game.playerOne(userOne);
+    // game.playerTwo(userTwo);
+    // updateScreen();
 }
 
 screenController();
