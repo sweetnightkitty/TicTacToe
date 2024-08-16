@@ -29,6 +29,9 @@ function gameController() {
         }
     ]
 
+    const playerOne = (user) => players[0].name = user;
+    const playerTwo = (user) => players[1].name = user;
+
     let activePlayer = players[0];
 
     const switchPlayers = () => {
@@ -135,6 +138,8 @@ function gameController() {
         getActivePlayer,
         getBoard: board,
         isGameOver,
+        playerOne,
+        playerTwo,
     }
 }
 
@@ -143,6 +148,9 @@ function screenController() {
     let game = gameController();
     const announcePlayerTurn = document.querySelector(".player-turn");
     const gameBoardDiv = document.querySelector(".board");
+
+    const userOne = "Jack";
+    const userTwo = "Sally";
 
     const startBtn = document.querySelector(".btn-start");
     startBtn.addEventListener("click", () => {
@@ -159,6 +167,9 @@ function screenController() {
 
         //Reruns the function, and reassigns to game in order to reset the 2d array back to all zeros and restart the game play.
         game = gameController();
+
+        game.playerOne(userOne);
+        game.playerTwo(userTwo);
         updateScreen();
     })
 
@@ -204,7 +215,7 @@ function screenController() {
 
         //ensures you don't select the gaps
         if(!selectedButton) return;
-
+        
         //gets the activePlayer before players are switched
         const activePlayer = game.getActivePlayer();
 
@@ -251,6 +262,8 @@ function screenController() {
                 const startBtn = document.querySelector(".btn-start");
                 startBtn.style.display = "block";
 
+                game.playerOne(userOne);
+                game.playerTwo(userTwo);
                 updateScreen();
 
             }
@@ -262,7 +275,9 @@ function screenController() {
 
     gameBoardDiv.addEventListener("click", clickBoard);
 
-    //initial render
+    //initial render (player 1 is not here at first)
+    game.playerOne(userOne);
+    game.playerTwo(userTwo);
     updateScreen();
 }
 
