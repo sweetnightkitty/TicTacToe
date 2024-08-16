@@ -40,7 +40,6 @@ function gameController() {
     //gets board
     const board = getBoard();
 
-
     //selectedButton is the button pressed by player on UI
     const playRound = (selectedButton) => {
         let row;
@@ -74,83 +73,68 @@ function gameController() {
 
         board[row][column] = activePlayer.marker;
 
-        //Checks if game is over or returns winner
-        const isGameOver = () => {
-            //checks the left column
-            if(board[0][0] == board[1][0] && board[0][0] == board[2][0] && board[0][0] != 0) {
-                return board[0][0];
-            }
-
-            //checks the upper row
-            if(board[0][0] == board[0][1] && board[0][0] == board[0][2] && board[0][0] != 0) {
-                return board[0][0];
-            }
-
-            //checks middle row, middle column, and two diagonals
-            if(
-                board[1][1] != 0 &&
-                (board[1][1] == board[1][0] && board[1][1] == board[1][2]) ||
-                (board[1][1] == board[0][1] && board[1][1] == board[2][1]) ||
-                (board[1][1] == board[0][0] && board[1][1] == board[2][2]) ||
-                (board[1][1] == board[0][2] && board[1][1] == board[2][0])
-            ) {
-                return board[1][1];
-            }
-
-            //checks the lower row
-            if(board[2][2] == board[2][1] && board[2][2] == board[2][0] && board[2][2] != 0) {
-                return board[2][2];
-            }
-
-            //checks the right column
-            if(board[2][2] == board[1][2] && board[2][2] == board[0][2] && board[2][2] != 0) {
-                return board[2][2];
-            }
-
-            //Counts how many spaces on the board have been taken
-            let tempArray = [];
-            for(let i = 0; i < 3; i++) {
-                for(let j = 0; j < 3; j++) {
-                    if(board[i][j] != 0) {
-                        tempArray.push(1);
-                    }
-                }
-            }
-
-            //Announces a draw when all 9 spaces on the board are taken but no winner has been returned
-            if(tempArray.length === 9) {
-                return "draw";
-            }
-
-        }
-
-        //Announces the winner
-        const winnerModal = document.querySelector(".winner-modal");
-        const winnerMsg = document.querySelector(".winner-msg");
-        const gameBoard = document.querySelector(".game");
-        if(isGameOver() == "O") {
-            winnerMsg.textContent = activePlayer.name + " is the winner!";
-            winnerModal.style.display = "block";
-            gameBoard.style.visibility = "hidden";
-        } else if(isGameOver() == "X") {
-            winnerMsg.textContent = activePlayer.name + " is the winner!";
-            winnerModal.style.display = "block";
-            gameBoard.style.visibility = "hidden";
-        } else if(isGameOver() == "draw") {
-            winnerMsg.textContent = "It's a draw!";
-            winnerModal.style.display = "block";
-            gameBoard.style.visibility = "hidden";
-        }
 
         console.log(board); //logs updated board to console
         switchPlayers(); //switches players in preparation for the next round
+        
+    }
+
+    //Checks if game is over or returns winner
+    const isGameOver = () => {
+        //checks the left column
+        if(board[0][0] == board[1][0] && board[0][0] == board[2][0] && board[0][0] != 0) {
+            return board[0][0];
+        }
+
+        //checks the upper row
+        if(board[0][0] == board[0][1] && board[0][0] == board[0][2] && board[0][0] != 0) {
+            return board[0][0];
+        }
+
+        //checks middle row, middle column, and two diagonals
+        if(
+            board[1][1] != 0 &&
+            (board[1][1] == board[1][0] && board[1][1] == board[1][2]) ||
+            (board[1][1] == board[0][1] && board[1][1] == board[2][1]) ||
+            (board[1][1] == board[0][0] && board[1][1] == board[2][2]) ||
+            (board[1][1] == board[0][2] && board[1][1] == board[2][0])
+        ) {
+            return board[1][1];
+        }
+
+        //checks the lower row
+        if(board[2][2] == board[2][1] && board[2][2] == board[2][0] && board[2][2] != 0) {
+            return board[2][2];
+        }
+
+        //checks the right column
+        if(board[2][2] == board[1][2] && board[2][2] == board[0][2] && board[2][2] != 0) {
+            return board[2][2];
+        }
+
+        //Counts how many spaces on the board have been taken
+        let tempArray = [];
+        for(let i = 0; i < 3; i++) {
+            for(let j = 0; j < 3; j++) {
+                if(board[i][j] != 0) {
+                    tempArray.push(1);
+                }
+            }
+        }
+
+        //Announces a draw when all 9 spaces on the board are taken but no winner has been returned
+        if(tempArray.length === 9) {
+            return "draw";
+        }
 
     }
+
 
     return {
         playRound,
         getActivePlayer,
         getBoard: board,
+        isGameOver,
     }
 }
 
@@ -170,12 +154,12 @@ function screenController() {
 
     const resetBtn = document.querySelector(".btn-reset");
     resetBtn.addEventListener("click", () => {
-                //clear the board
-                gameBoardDiv.textContent = "";
+        //clear the board
+        gameBoardDiv.textContent = "";
 
-                //Reruns the function, and reassigns to game in order to reset the 2d array back to all zeros and restart the game play.
-                game = gameController();
-                updateScreen();
+        //Reruns the function, and reassigns to game in order to reset the 2d array back to all zeros and restart the game play.
+        game = gameController();
+        updateScreen();
     })
 
     const updateScreen = () => {
@@ -218,13 +202,39 @@ function screenController() {
     function clickBoard(e) {
         const selectedButton = e.target.dataset.number;
 
+        //ensures you don't select the gaps
         if(!selectedButton) return;
 
+        //gets the activePlayer before players are switched
+        const activePlayer = game.getActivePlayer();
+
+        //runs game based on button clicked
         game.playRound(selectedButton);
 
+        //checks who the winner is (if one), and then generates a winner message
+        const winner = game.isGameOver();
+        const winnerModal = document.querySelector(".winner-modal");
+        const winnerMsg = document.querySelector(".winner-msg");
+        const gameBoard = document.querySelector(".game");
+
+        if(winner == "O") {
+            winnerMsg.textContent = activePlayer.name + " is the winner!";
+            winnerModal.style.display = "block";
+            gameBoard.style.visibility = "hidden";
+
+        } else if(winner == "X") {
+            winnerMsg.textContent = activePlayer.name + " is the winner!";
+            winnerModal.style.display = "block";
+            gameBoard.style.visibility = "hidden";
+        } else if(winner == "draw") {
+            winnerMsg.textContent = "It's a draw!";
+            winnerModal.style.display = "block";
+            gameBoard.style.visibility = "hidden";
+        }
 
         updateScreen();
     }
+
 
     gameBoardDiv.addEventListener("click", clickBoard);
 
