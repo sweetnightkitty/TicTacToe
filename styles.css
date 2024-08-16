@@ -88,17 +88,17 @@ header>h1 {
     transform: translate(-50%, -50%);
     width: 55vw;
     height: 25vh;
-    background-color: white;
-    border: 2px dashed var(--color-dark-theme-bgd);
+    background-color: var(--color-dark-theme-bgd);
+    border: 2px dashed white;
     padding: 20px 40px;
     display: none;
 }
 
 .winner-msg {
     font-family: "PC senior";
-    font-size: 50px;
+    font-size: 45px;
     text-align: center;
-    color: var(--color-dark-theme-bgd);
+    color: var(--color-retro-yellow);
 }
 
 form {
@@ -139,6 +139,8 @@ input {
     height: 20px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
+    font-family: "PC senior";
+    font-size: 11px;
 }
 
 .btn-submit-form {
@@ -161,9 +163,9 @@ input {
 
 .btn-play-again {
     font-family: "PC senior";
-    background-color: var(--color-retro-yellow);
-    color: var(--color-dark-theme-bgd);
-    border: 2px dashed var(--color-dark-theme-bgd);
+    background-color: var(--color-dark-theme-bgd);
+    color: white;
+    border: 2px dashed var(--color-retro-yellow);
     padding: 10px 20px;
     margin-bottom: 15px;
 }
