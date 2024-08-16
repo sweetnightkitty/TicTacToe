@@ -148,6 +148,7 @@ function screenController() {
     let game = gameController();
     const announcePlayerTurn = document.querySelector(".player-turn");
     const gameBoardDiv = document.querySelector(".board");
+    const gameMenu = document.querySelector(".game");
 
     let userOne = "Jack";
     let userTwo = "Sally";
@@ -161,13 +162,14 @@ function screenController() {
         form.style.visibility = "visible";
 
         formSubmitBtn.addEventListener("click", () => {
-            const gameDiv = document.querySelector(".game");
-            gameDiv.style.visibility = "visible";
+            // const gameDiv = document.querySelector(".game");
+            gameMenu.style.visibility = "visible";
             form.style.visibility = "hidden";
             gameBoardDiv.style.visibility = "visible";
 
             userOne = document.getElementById("userOne").value;
             userTwo = document.getElementById("userTwo").value;
+            form.reset();
 
             //initial render of the game
             game.playerOne(userOne);
@@ -257,25 +259,29 @@ function screenController() {
         const winner = game.isGameOver();
         const winnerModal = document.querySelector(".winner-modal");
         const winnerMsg = document.querySelector(".winner-msg");
-        const gameBoard = document.querySelector(".game");
+        // const gameBoard = document.querySelector(".game");
+        // const boardGame = document.querySelector(".board");
         const playAgainBtn = document.querySelector(".btn-play-again");
 
         //displays the winner modal announcing a winner if O X or draw is called
         if(winner == "O") {
             winnerMsg.textContent = activePlayer.name + " is the winner!";
             winnerModal.style.display = "block";
-            gameBoard.style.visibility = "hidden";
+            gameBoardDiv.style.visibility = "hidden";
             playAgainBtn.disabled = false;
+            gameMenu.style.visibility = "hidden";
 
         } else if(winner == "X") {
             winnerMsg.textContent = activePlayer.name + " is the winner!";
             winnerModal.style.display = "block";
-            gameBoard.style.visibility = "hidden";
+            gameBoardDiv.style.visibility = "hidden";
+            gameMenu.style.visibility = "hidden";
             playAgainBtn.disabled = false;
         } else if(winner == "draw") {
             winnerMsg.textContent = "It's a draw!";
             winnerModal.style.display = "block";
-            gameBoard.style.visibility = "hidden";
+            gameBoardDiv.style.visibility = "hidden";
+            gameMenu.style.visibility = "hidden";
             playAgainBtn.disabled = false;
         }
 
@@ -283,6 +289,7 @@ function screenController() {
         playAgainBtn.addEventListener("click", () => {
             //Prevents the button from working until a winner or draw is found.
             if(winner != 0) {
+
                 //clear the board
                 gameBoardDiv.textContent = "";
 
@@ -290,8 +297,10 @@ function screenController() {
                 game = gameController();
 
                 winnerModal.style.display = "none";
-                const startBtn = document.querySelector(".btn-start");
-                startBtn.style.display = "block";
+                
+
+                //Gives a chance to type in new player names
+                form.style.visibility = "visible";
 
                 game.playerOne(userOne);
                 game.playerTwo(userTwo);
