@@ -201,6 +201,7 @@ function screenController() {
 
         form.style.visibility = "visible";
         gameBoardDiv.style.visibility = "hidden";
+        gameMenu.style.visibility = "hidden";
         game.playerOne(userOne);
         game.playerTwo(userTwo);
         updateScreen();
@@ -296,12 +297,12 @@ function screenController() {
                 //Reruns the function, and reassigns to game in order to reset the 2d array back to all zeros and restart the game play.
                 game = gameController();
 
+
                 winnerModal.style.display = "none";
-                
+                gameBoardDiv.style.visibility = "visible";
+                gameMenu.style.visibility = "visible";
 
-                //Gives a chance to type in new player names
-                form.style.visibility = "visible";
-
+                //Preserve previous names
                 game.playerOne(userOne);
                 game.playerTwo(userTwo);
                 updateScreen();
