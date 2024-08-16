@@ -218,6 +218,7 @@ function screenController() {
         const gameBoard = document.querySelector(".game");
         const playAgainBtn = document.querySelector(".btn-play-again");
 
+        //displays the winner modal announcing a winner if O X or draw is called
         if(winner == "O") {
             winnerMsg.textContent = activePlayer.name + " is the winner!";
             winnerModal.style.display = "block";
@@ -236,7 +237,9 @@ function screenController() {
             playAgainBtn.disabled = false;
         }
 
+
         playAgainBtn.addEventListener("click", () => {
+            //Prevents the button from working until a winner or draw is found.
             if(winner != 0) {
                 //clear the board
                 gameBoardDiv.textContent = "";
