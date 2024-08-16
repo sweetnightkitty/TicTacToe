@@ -70,7 +70,7 @@ header>h1 {
     padding: 20px 40px;
 }
 
-.btn-reset {
+.btn-reset, .btn-new-players {
     font-family: "PC senior";
     background-color: var(--color-dark-theme-bgd);
     color: white;
