@@ -125,8 +125,13 @@ form {
 .form-fields {
     display: flex;
     align-items: center;
-    text-align: center;
+    justify-content:space-around;
     flex: 1;
+}
+
+.form-one, .form-two {
+    display: flex;
+    flex-direction: column;
 }
 
 input {
